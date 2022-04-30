@@ -128,6 +128,7 @@ public class MenuInstance {
                             break;
                         }
                     }
+                    break;
                 case 2:
                     while (true) { // Logic and implementation of the 'Subtraction' operation
                         // An array list of integers to hold the inputs of the user
@@ -202,6 +203,8 @@ public class MenuInstance {
                             break;
                         }
                     }
+                    break;
+                case 3:
             }
             return false;
         }
