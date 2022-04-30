@@ -1,14 +1,20 @@
 package com.sparta.gh;
 
 import com.sparta.gh.calculator.Calculator;
-import com.sparta.gh.userInputs.UserInputs;
 
 import java.util.ArrayList;
 import java.util.Scanner;
 
 public class MenuInstance {
-    // Holds the inputted integers for the resulting calculation
-    private static ArrayList<Integer> ints = new ArrayList<>();
+    // Holds the current display
+    public static int calculationsMade = 0;
+    public static double currentInput = 0;
+    public static double currentOperationValue = 0;
+    public static double currentEquationResult = 0;
+    public static char EqualOperator = '=';
+    public static String currentOperator = "";
+
+    public static Calculator calculator = new Calculator();
 
     // A part of the singleton implementation to ensure only one menu exists at any given time
     // Also ensures only a single thread can access the menu at any one time - further ensures that the object
@@ -38,191 +44,132 @@ public class MenuInstance {
 
     // A static method which returns the aesthetic menu for the console, in order to make use of the
     // calculator itself
-    public static boolean showMenu() {
-        System.out.println("\n\n\n\n\n\n\n\n  =-=-=-=-=-=-=-=\n  | Calculator  |\n  =-=-=-=-=-=-=-=");
-        System.out.println("____________________\n|Addition       (1)|\n--------------------");
-        System.out.println("____________________\n|Subtraction    (2)|\n--------------------");
-        System.out.println("____________________\n|Multiplication (3)|\n--------------------");
-        System.out.println("____________________\n|Division       (4)|\n--------------------");
-        System.out.println("\n____________________\n|Exit           (0)|\n--------------------");
+    public static boolean showMainMenu() {
+        boolean exitCalc = false;
+        if (calculationsMade == 0){
+            System.out.println("\n\n\n\n\n\n\n\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t  =-=-=-=-=-=-=-=\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t  | Calculator  |\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t  =-=-=-=-=-=-=-=");
+            System.out.println("\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t  |" + "\t\t\t\t|");
+            System.out.println("\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t  |" + "\t\t\t\t|__");
+            System.out.println("\t\t\t\t\t\t\t\t\t\t\t   Current Result:" + "|" + MenuInstance.currentInput);
+            System.out.println("\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t  =-=-=-=-=-=-=-=" + "\n\n");
 
-        // stores the menu choice inputted by the user
-        int menuChoice = getMenuInput();
+            while (true) {
+                MenuInstance.currentInput = getCalculatorInput();
 
-        // First condition evaluates whether to terminate the program
-        if (menuChoice == 0) {
-            return true;
-        } else { // Switch operator which evaluates which operation the user has selected to use
-            switch (menuChoice) {
-                case 1:
-                    while (true) { // Logic and implementation of the 'Addition' operation
-                        // An array list of integers to hold the inputs of the user
-                        ArrayList<Integer> ints = new ArrayList<>();
+                System.out.println("Enter (1) to continue or (0) to clear and re-enter input: ");
+                int choice = 0;
 
-                        while (true) {
-                            // Adds the users inputs for the calculation to the arraylist
-                            ints.add(UserInputs.getIntInput());
+                Scanner inp = new Scanner(System.in);
+                choice = inp.nextInt();
 
-                            // Evaluates whether the user has already entered two integers into the equation
-                            if (ints.size() > 1) {
-                                System.out.println("Current input:");
-                                // Prints the current inputs to console
-                                for (int i = 0; i < ints.size(); i++) {
-                                    if (i == ints.size()) {
-                                        System.out.print(ints.get(i));
-                                    } else {
-                                        System.out.print(ints.get(i) + " + ");
-                                        continue;
-                                    }
-                                }
-                                // Asks the user if the equation is ready for evaluation or not
-                                System.out.println("\nEnter '1' to add another integer or any other key to finish and calculate: ");
-                                String choice = "";
-                                Scanner inp = new Scanner(System.in);
-                                choice = inp.next();
-                                if (choice.charAt(0) == '1') {
-                                    continue;
-                                } else {
-                                    MenuInstance.ints = ints;
-                                    break;
-                                }
-                                // Else statement runs when the user is yet to input the first integer of the
-                                // equation
-                            } else {
-                                System.out.println("\nCurrent input: ");
-                                for (int i = 0; i < ints.size(); i++) {
-                                    System.out.print(' ');
-                                    if (i == ints.size()) {
-                                        System.out.print(ints.get(i));
-                                    } else {
-                                        System.out.print(ints.get(i) + " + ");
-                                        continue;
-                                    }
-                                }
-                                continue;
-                            }
-                        }
-                        Calculator calculator = new Calculator();
-                        // Calls the method that calculates the evaluation of the users inputs
-                        int result = calculator.addition(ints);
-
-                        // Prints the answer... obviously
-                        System.out.println("\n\nAnswer:");
-                        for (int i = 0; i < ints.size(); i++){
-                            if (i == ints.size() - 1){
-                                System.out.print(ints.get(i) + " = " + result);
-                            } else{
-                                System.out.print(ints.get(i) + " + ");
-                            }
-                        }
-                        System.out.println("\n");
-
-                        // Offers the user the opportunity to evaluate a new equation or return to the main menu
-                        String enter = "";
-                        System.out.println("\nEnter '1' to start over, or enter any character to return to the main menu: ");
-                        Scanner inp = new Scanner(System.in);
-                        enter = inp.next();
-                        if (enter.charAt(0) == '1') {
-                            continue;
-                        } else {
-                            break;
-                        }
-                    }
+                if (choice == 1) {
                     break;
-                case 2:
-                    while (true) { // Logic and implementation of the 'Subtraction' operation
-                        // An array list of integers to hold the inputs of the user
-                        ArrayList<Integer> ints = new ArrayList<>();
-
-                        while (true) {
-                            // Adds the users inputs for the calculation to the arraylist
-                            ints.add(UserInputs.getIntInput());
-
-                            // Evaluates whether the user has already entered two integers into the equation
-                            if (ints.size() > 1) {
-                                System.out.println("Current input:");
-                                // Prints the current inputs to console
-                                for (int i = 0; i < ints.size(); i++) {
-                                    if (i == ints.size()) {
-                                        System.out.print(ints.get(i));
-                                    } else {
-                                        System.out.print(ints.get(i) + " - ");
-                                        continue;
-                                    }
-                                }
-                                // Asks the user if the equation is ready for evaluation or not
-                                System.out.println("\nEnter '1' to input another integer or any other key to finish and calculate: ");
-                                String choice = "";
-                                Scanner inp = new Scanner(System.in);
-                                choice = inp.next();
-                                if (choice.charAt(0) == '1') {
-                                    continue;
-                                } else {
-                                    MenuInstance.ints = ints;
-                                    break;
-                                }
-                                // Else statement runs when the user is yet to input the first integer of the
-                                // equation
-                            } else {
-                                System.out.println("\nCurrent input: ");
-                                for (int i = 0; i < ints.size(); i++) {
-                                    System.out.print(' ');
-                                    if (i == ints.size()) {
-                                        System.out.print(ints.get(i));
-                                    } else {
-                                        System.out.print(ints.get(i) + " - ");
-                                        continue;
-                                    }
-                                }
-                                continue;
-                            }
-                        }
-                        Calculator calculator = new Calculator();
-                        // Calls the method that calculates the evaluation of the users inputs
-                        int result = calculator.subtraction(ints);
-
-                        // Prints the answer
-                        System.out.println("\n\nAnswer:");
-                        for (int i = 0; i < ints.size(); i++){
-                            if (i == ints.size() - 1){
-                                System.out.print(ints.get(i) + " = " + result);
-                            } else{
-                                System.out.print(ints.get(i) + " - ");
-                            }
-                        }
-                        System.out.println("\n");
-
-                        // Offers the user the opportunity to evaluate a new equation or return to the main menu
-                        String enter = "";
-                        System.out.println("\nEnter '1' to start over, or enter any character to return to the main menu: ");
-                        Scanner inp = new Scanner(System.in);
-                        enter = inp.next();
-                        if (enter.charAt(0) == '1') {
-                            continue;
-                        } else {
-                            break;
-                        }
-                    }
-                    break;
-                case 3:
+                } else {
+                    continue;
+                }
             }
-            return false;
+            exitCalc = showOperationMenu();
+        } else {
+         exitCalc = showOperationMenu();
+        }
+        return exitCalc;
+    }
+
+    public static boolean showOperationMenu() {
+        boolean exitCalc = false;
+        while(true){
+            System.out.println("\n\n\n\n\n\n\n\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t  =-=-=-=-=-=-=-=\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t  | Calculator  |\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t  =-=-=-=-=-=-=-=");
+            System.out.println("\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t  |" + "\t\t\t\t|");
+            System.out.println("\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t  |" + "\t\t\t\t|__");
+            System.out.println("\t\t\t\t\t\t\t\t\t\t\t   Current Result:" + "|" + MenuInstance.currentInput + " "
+                    + MenuInstance.currentOperator + " ");
+            if (MenuInstance.currentOperationValue > 0){
+                System.out.print(MenuInstance.currentOperationValue + " " + MenuInstance.EqualOperator + " ");
+            }
+            if (MenuInstance.currentEquationResult > 0){
+                System.out.print(MenuInstance.currentEquationResult);
+            }
+            System.out.println("\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t  =-=-=-=-=-=-=-=" + "\n\n");
+
+            exitCalc = showOperationTable();
+
+            return exitCalc;
         }
     }
 
-    public static int getMenuInput() {
-        int it = 0;
-        int choice = 0;
-        Scanner input = new Scanner(System.in);
 
-        System.out.println("\nEnter a menu input: ");
+    public static double getCalculatorInput() {
+        int it = 0;
+        double choice = 0;
 
         while (true) {
-            if (it > 0) {
+            try {
+                System.out.println("\nEnter a number: ");
+                Scanner inp = new Scanner(System.in);
+                choice = inp.nextDouble();
+                return choice;
+            } catch (Exception e) {
                 System.out.println("\nInvalid input. Please try again: ");
+                continue;
             }
-            choice = input.nextInt();
-            return choice;
+        }
+    }
+
+    public static boolean showOperationTable() {
+        char menuChoice;
+        System.out.println("____________________\t____________________\t____________________\t____________________\t\t\t\t____________________\t____________________" +
+                "\n|Addition       (A)|\t|Subtraction    (S)|\t|Multiplication (M)|\t|Division       (D)|\t\t\t\t|Clear Display  (C)|\t|Exit           (E)|" +
+                "\n--------------------\t--------------------\t--------------------\t--------------------\t\t\t\t--------------------\t--------------------");
+        menuChoice = getMenuInput();
+
+        switch (menuChoice){
+            case 'A':
+                currentOperator = "+";
+                currentOperationValue = getCalculatorInput();
+                currentEquationResult = calculator.addition(currentInput, currentOperationValue);
+                calculationsMade++;
+                break;
+            case 'S':
+                currentOperator = "-";
+                currentOperationValue = getCalculatorInput();
+//                currentEquationResult = calculator.subtraction(currentInput, currentOperationValue);
+                break;
+            case 'E':
+                return true;
+        }
+        return false;
+    }
+
+    public static char getMenuInput() {
+        String choice = "";
+
+        while (true) {
+            try {
+                System.out.println("\nSelect a menu item: ");
+                Scanner inp = new Scanner(System.in);
+                choice = inp.next();
+
+                switch (choice.charAt(0)) {
+                    case 'A', 'a':
+                        return 'A';
+                    case 'S', 's':
+                        return 'S';
+                    case 'M', 'm':
+                        return 'M';
+                    case 'D', 'd':
+                        return 'D';
+                    case 'C', 'c':
+                        return 'C';
+                    case 'E', 'e':
+                        return 'E';
+                    default:
+                        continue;
+                }
+            } catch (Exception e) {
+                System.out.println("\nInvalid input. Please try again: ");
+                continue;
+            }
         }
     }
 }
+

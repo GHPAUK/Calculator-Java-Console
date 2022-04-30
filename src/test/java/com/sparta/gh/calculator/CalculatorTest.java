@@ -45,5 +45,15 @@ class CalculatorTest {
         // Then
         Assertions.assertEquals(expected, result);
     }
-    
+
+    @ParameterizedTest
+    @ValueSource(ints = {2, 4, 8, 16})
+    void calculatorMultiplicationTest(int integers){
+        // Given
+
+        // When
+
+        // Then
+    }
+
 }
