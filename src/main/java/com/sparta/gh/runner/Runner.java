@@ -1,6 +1,6 @@
 package com.sparta.gh.runner;
 
-import com.sparta.gh.MenuInstance;
+import com.sparta.gh.menu.MenuInstance;
 
 public class Runner {
 

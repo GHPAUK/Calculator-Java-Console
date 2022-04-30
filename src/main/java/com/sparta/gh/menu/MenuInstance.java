@@ -1,8 +1,7 @@
-package com.sparta.gh;
+package com.sparta.gh.menu;
 
 import com.sparta.gh.calculator.Calculator;
 
-import java.util.ArrayList;
 import java.util.Scanner;
 
 public class MenuInstance {
@@ -127,6 +126,8 @@ public class MenuInstance {
                 currentOperator = "+";
                 currentOperationValue = getCalculatorInput();
                 currentEquationResult = calculator.addition(currentInput, currentOperationValue);
+                currentInput = currentEquationResult;
+                clean();
                 calculationsMade++;
                 break;
             case 'S':
@@ -170,6 +171,12 @@ public class MenuInstance {
                 continue;
             }
         }
+    }
+
+    public static void clean(){
+        currentOperationValue = 0;
+        currentOperator = "";
+        currentEquationResult = 0;
     }
 }
 
