@@ -47,7 +47,7 @@ public class MenuInstance {
     public static boolean showMainMenu() {
         boolean exitCalc = false;
         if (calculationsMade == 0){
-            System.out.println("\n\n\n\n\n\n\n\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t  =-=-=-=-=-=-=-=" +
+            System.out.println("\n\n\n\n\n\n\n\n\n\n\n\n\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t  =-=-=-=-=-=-=-=" +
                     "\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t  | Calculator  |\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t  =-=-=-=-=-=-=-=");
             System.out.println("\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t  |" + "*-*-*-*-*-*-*|");
             System.out.println("\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t  |" + "*-*-*-*-*-*-*|");
@@ -82,7 +82,7 @@ public class MenuInstance {
     public static boolean showOperationMenu() {
         boolean exitCalc = false;
         while(true){
-            System.out.println("\n\n\n\n\n\n\n\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t  =-=-=-=-=-=-=-=" +
+            System.out.println("\n\n\n\n\n\n\n\n\n\n\n\n\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t  =-=-=-=-=-=-=-=" +
                     "\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t  | Calculator  |\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t  =-=-=-=-=-=-=-=");
             System.out.println("\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t  |" + "*-*-*-*-*-*-*|");
             System.out.println("\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t  |" + "*-*-*-*-*-*-*|");
@@ -187,6 +187,12 @@ public class MenuInstance {
                 currentInput = currentEquationResult;
                 calculationsMade++;
                 break;
+            case 'R':
+                currentInput = 0;
+                previousInput = 0;
+                calculationsMade = 0;
+                clean();
+                break;
             case 'E':
                 return true;
         }
@@ -211,8 +217,8 @@ public class MenuInstance {
                         return 'M';
                     case 'D', 'd':
                         return 'D';
-                    case 'C', 'c':
-                        return 'C';
+                    case 'R', 'r':
+                        return 'R';
                     case 'E', 'e':
                         return 'E';
                     default:
