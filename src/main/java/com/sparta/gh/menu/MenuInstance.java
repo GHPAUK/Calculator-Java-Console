@@ -91,10 +91,10 @@ public class MenuInstance {
                 System.out.print("\t\t\t\t\t\t\t\t\t\t\tPrevious Equation:" + "|");
                 System.out.print(MenuInstance.previousInput + " "
                         + MenuInstance.currentOperator + " ");
-                if (MenuInstance.currentOperationValue > 0){
+                if (MenuInstance.currentOperationValue != 0){
                     System.out.print(MenuInstance.currentOperationValue + " " + MenuInstance.EqualOperator + " ");
                 }
-                if (MenuInstance.currentEquationResult > 0){
+                if (MenuInstance.currentEquationResult != 0){
                     System.out.print(MenuInstance.currentEquationResult);
                 }
                 System.out.println("\n\t\t\t\t\t\t\t\t\t\t\t===============================================");
@@ -150,7 +150,14 @@ public class MenuInstance {
             case 'S':
                 currentOperator = "-";
                 currentOperationValue = getCalculatorInput();
-//                currentEquationResult = calculator.subtraction(currentInput, currentOperationValue);
+                currentEquationResult = calculator.subtraction(currentInput, currentOperationValue);
+                if (calculationsMade > 0){
+                    if (calculationsMade > calculationsMade - 1){
+                        previousInput = currentInput;
+                    }
+                }
+                currentInput = currentEquationResult;
+                calculationsMade++;
                 break;
             case 'E':
                 return true;

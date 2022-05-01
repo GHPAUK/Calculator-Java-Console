@@ -23,4 +23,15 @@ class CalculatorTest {
         Assertions.assertEquals(expected, result);
     }
 
+    @ParameterizedTest
+    @ValueSource(doubles = {5, 10, 15})
+    void calculatorSubtractionTest(double integers){
+        // Given
+        double base = 100;
+        double expected = base - integers;
+        // When
+        double result = calc.subtraction(base, integers);
+        // Then
+        Assertions.assertEquals(expected, result);
+    }
 }
