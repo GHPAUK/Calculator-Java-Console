@@ -52,6 +52,8 @@ public class MenuInstance {
             System.out.println("\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t  |" + "*-*-*-*-*-*-*|");
             System.out.println("\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t  |" + "*-*-*-*-*-*-*|");
             System.out.println("\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t  |" + "*-*-*-*-*-*-*|");
+            System.out.println("\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t  |" + "*-*-*-*-*-*-*|");
+            System.out.println("\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t  |" + "*-*-*-*-*-*-*|");
             System.out.println("\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t  =-=-=-=-=-=-=-=");
             System.out.println("\t\t\t\t\t\t\t\t\t\t\t   Current Result:" + "|" + MenuInstance.previousInput);
 
@@ -85,10 +87,12 @@ public class MenuInstance {
             System.out.println("\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t  |" + "*-*-*-*-*-*-*|");
             System.out.println("\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t  |" + "*-*-*-*-*-*-*|");
             System.out.println("\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t  |" + "*-*-*-*-*-*-*|");
+            System.out.println("\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t  |" + "*-*-*-*-*-*-*|");
+            System.out.println("\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t  |" + "*-*-*-*-*-*-*|");
             System.out.println("\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t  =-=-=-=-=-=-=-=");
 
             if (currentOperationValue != 0 ){
-                System.out.print("\t\t\t\t\t\t\t\t\t\t\tPrevious Equation:" + "|");
+                System.out.print("\n\t\t\t\t\t\t\t\t\t\t\tPrevious Equation:" + "|");
                 System.out.print(MenuInstance.previousInput + " "
                         + MenuInstance.currentOperator + " ");
                 if (MenuInstance.currentOperationValue != 0){
@@ -163,6 +167,18 @@ public class MenuInstance {
                 currentOperator = "*";
                 currentOperationValue = getCalculatorInput();
                 currentEquationResult = calculator.multiplication(currentInput, currentOperationValue);
+                if (calculationsMade > 0){
+                    if (calculationsMade > calculationsMade - 1){
+                        previousInput = currentInput;
+                    }
+                }
+                currentInput = currentEquationResult;
+                calculationsMade++;
+                break;
+            case 'D':
+                currentOperator = "/";
+                currentOperationValue = getCalculatorInput();
+                currentEquationResult = calculator.division(currentInput, currentOperationValue);
                 if (calculationsMade > 0){
                     if (calculationsMade > calculationsMade - 1){
                         previousInput = currentInput;

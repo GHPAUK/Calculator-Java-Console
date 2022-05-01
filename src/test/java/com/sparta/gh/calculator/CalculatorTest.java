@@ -45,4 +45,15 @@ class CalculatorTest {
         // Then
         Assertions.assertEquals(expected, result);
     }
+
+    @ParameterizedTest
+    @ValueSource(doubles = {5, 10, 15})
+    void calculatorDivisionTest(double integers){
+        // Given
+        double expected = integers / integers;
+        // When
+        double result = calc.division(integers, integers);
+        // Then
+        Assertions.assertEquals(expected, result);
+    }
 }

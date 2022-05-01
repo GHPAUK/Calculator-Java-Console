@@ -18,4 +18,8 @@ public class Calculator {
     public double multiplication(double inputOne, double inputTwo) {
         return inputOne * inputTwo;
     }
+
+    public double division(double inputOne, double inputTwo) {
+        return inputOne / inputTwo;
+    }
 }
