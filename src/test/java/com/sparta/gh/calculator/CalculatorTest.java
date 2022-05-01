@@ -34,4 +34,15 @@ class CalculatorTest {
         // Then
         Assertions.assertEquals(expected, result);
     }
+
+    @ParameterizedTest
+    @ValueSource(doubles = {5, 10, 15})
+    void calculatorMultiplicationTest(double integers){
+        // Given
+        double expected = integers * integers;
+        // When
+        double result = calc.multiplication(integers, integers);
+        // Then
+        Assertions.assertEquals(expected, result);
+    }
 }

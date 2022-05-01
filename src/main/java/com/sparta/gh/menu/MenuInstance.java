@@ -159,6 +159,18 @@ public class MenuInstance {
                 currentInput = currentEquationResult;
                 calculationsMade++;
                 break;
+            case 'M':
+                currentOperator = "*";
+                currentOperationValue = getCalculatorInput();
+                currentEquationResult = calculator.multiplication(currentInput, currentOperationValue);
+                if (calculationsMade > 0){
+                    if (calculationsMade > calculationsMade - 1){
+                        previousInput = currentInput;
+                    }
+                }
+                currentInput = currentEquationResult;
+                calculationsMade++;
+                break;
             case 'E':
                 return true;
         }

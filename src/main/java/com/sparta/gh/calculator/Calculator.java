@@ -14,4 +14,8 @@ public class Calculator {
     public double subtraction(double inputOne, double inputTwo) {
         return inputOne - inputTwo;
     }
+
+    public double multiplication(double inputOne, double inputTwo) {
+        return inputOne * inputTwo;
+    }
 }
