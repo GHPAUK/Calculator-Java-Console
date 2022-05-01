@@ -5,27 +5,31 @@ import com.sparta.gh.calculator.Calculator;
 import java.util.Scanner;
 
 public class MenuInstance {
-    // Holds the current display
+    // Counts the calculations made in the instance, used to control what menu is displayed
     public static int calculationsMade = 0;
+    // Tracks the previous input
     public static double previousInput = 0;
+    // Tracks current input
     public static double currentInput = 0;
+    // Tracks the value entered which will be used to complete the chosen operation
     public static double currentOperationValue = 0;
+    // Tracks the evaluated result of the chosen equation
     public static double currentEquationResult = 0;
+    // The equals sign for aesthetics
     public static char EqualOperator = '=';
+    // Tracks the current operator for the chosen operator for aesthetics
     public static String currentOperator = "";
 
+    // Creates an instance of the calculator to conduct operations
     public static Calculator calculator = new Calculator();
 
     // A part of the singleton implementation to ensure only one menu exists at any given time
     // Also ensures only a single thread can access the menu at any one time - further ensures that the object
-    // is constructed fully in memory before another thread can access it (half initialised), to ensure the object
-    // is correctly initialised
+    // is constructed fully in memory before another thread can access it (while it is half initialised)
     private static volatile MenuInstance singleInstance = null;
 
     // A private constructor - as is custom when implementing a singleton class
-    private MenuInstance() {
-
-    }
+    private MenuInstance() {}
 
     // A static method to retrieve the single instance of the menu
     // Here lies the logic to ensure the menu is as efficient as possible and accessible by a
@@ -46,6 +50,7 @@ public class MenuInstance {
     // calculator itself
     public static boolean showMainMenu() {
         boolean exitCalc = false;
+        // Checks if a previous calculation has been made - if so, displays the alternative menu
         if (calculationsMade == 0){
             System.out.println("\n\n\n\n\n\n\n\n\n\n\n\n\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t  =-=-=-=-=-=-=-=" +
                     "\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t  | Calculator  |\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t  =-=-=-=-=-=-=-=");
@@ -57,6 +62,7 @@ public class MenuInstance {
             System.out.println("\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t  =-=-=-=-=-=-=-=");
             System.out.println("\t\t\t\t\t\t\t\t\t\t\t   Current Result:" + "|" + MenuInstance.previousInput);
 
+            // Prompts the user for the initial number input
             while (true) {
                 MenuInstance.previousInput = getCalculatorInput();
                 currentInput = previousInput;
@@ -79,6 +85,7 @@ public class MenuInstance {
         return exitCalc;
     }
 
+    // The alternative menu for when calculations have already been made
     public static boolean showOperationMenu() {
         boolean exitCalc = false;
         while(true){
@@ -91,6 +98,7 @@ public class MenuInstance {
             System.out.println("\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t  |" + "*-*-*-*-*-*-*|");
             System.out.println("\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t  =-=-=-=-=-=-=-=");
 
+            // Checks if an equation is under construction or evaluated - if so, prints that information to the console
             if (currentOperationValue != 0 ){
                 System.out.print("\n\t\t\t\t\t\t\t\t\t\t\tPrevious Equation:" + "|");
                 System.out.print(MenuInstance.previousInput + " "
@@ -106,13 +114,17 @@ public class MenuInstance {
             System.out.println("\t\t\t\t\t\t\t\t\t\t\tCurrent  Input   :" + "|" + MenuInstance.currentInput);
             System.out.println("\n\n");
 
+            // Offers the menu options to the user to use the calculator - exit calc tracks whether the user
+            // has decided to exit the program
             exitCalc = showOperationTable();
 
+            // If true, program terminates
             return exitCalc;
         }
     }
 
 
+    // Asks the user for a number
     public static double getCalculatorInput() {
         int it = 0;
         double choice = 0;
@@ -130,6 +142,7 @@ public class MenuInstance {
         }
     }
 
+    // Shows menu options and prompts user for a decision
     public static boolean showOperationTable() {
         char menuChoice;
         System.out.println("____________________\t____________________\t____________________\t____________________\t\t\t\t____________________\t____________________" +
@@ -138,6 +151,7 @@ public class MenuInstance {
         menuChoice = getMenuInput();
         clean();
 
+        // Evaluates the users decision and executes the requested operation
         switch (menuChoice){
             case 'A':
                 currentOperator = "+";
@@ -199,6 +213,7 @@ public class MenuInstance {
         return false;
     }
 
+    // Handles the user's menu choice
     public static char getMenuInput() {
         String choice = "";
 
@@ -231,6 +246,7 @@ public class MenuInstance {
         }
     }
 
+    // Cleans up variables that are needed to be reset
     public static void clean(){
         currentOperationValue = 0;
         currentOperator = "";
