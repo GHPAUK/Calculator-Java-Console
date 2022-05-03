@@ -273,11 +273,11 @@ public class MenuInstance {
                 binaryChart.clear();
                 binaryChart.add(1);
                 binaryChart.add(2);
-                int tmp = 2;
-                int multBy = 2;
+                int chartValue = 2;
+                int multiplyBy = 2;
                 for (int i = 2; i < binaryForConversionInteger.size(); i++) {
-                    binaryChart.add(tmp * multBy);
-                    tmp = tmp * multBy;
+                    binaryChart.add(chartValue * multiplyBy);
+                    chartValue = chartValue * multiplyBy;
                 }
 
                 Collections.reverse(binaryChart);
@@ -400,7 +400,6 @@ public class MenuInstance {
                 }
             } catch (Exception e) {
                 System.out.println("\nInvalid input. Please try again: ");
-                continue;
             }
         }
     }

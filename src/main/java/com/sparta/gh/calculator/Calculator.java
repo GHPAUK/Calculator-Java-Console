@@ -1,5 +1,6 @@
 package com.sparta.gh.calculator;
 
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.Scanner;
 
